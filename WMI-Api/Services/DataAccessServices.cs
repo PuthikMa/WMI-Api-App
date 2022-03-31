@@ -16,16 +16,16 @@ namespace WMI_Api.Services
         {
             _dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(DataAccess));
         }
-        public async Task<List<Vehicle>> GetAllVehicle(string country, string search)
+        public async Task<List<Vehicle>> GetAllVehicle(string country, string searchByName, string searchByWMI, string searchByVehicleType)
         {
-            var results = await _dataAccess.GetVehicles(country, search);
+            var results = await _dataAccess.GetVehicles(country, searchByName, searchByWMI, searchByVehicleType);
 
             return results.OrderBy(x => x.createdon).OrderBy(x => x.wmi).ToList();
         }
 
         public async Task<List<string>> GetCountry()
         {
-            var results = await _dataAccess.GetVehicles(null, null);
+            var results = await _dataAccess.GetVehicles();
 
             return results.GroupBy(c => c.country).Select(grp => grp.First()).Select(x => x.country ?? "Null").OrderBy(q => q).ToList();
 

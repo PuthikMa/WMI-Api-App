@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using WMI_Api.Services.Broker;
 
@@ -19,9 +17,9 @@ namespace WMI_Api.Controllers
         }
 
         [HttpGet("Vehicles")]
-        public async Task<IActionResult> GetListVehicle(string country, string searchbyName)
+        public async Task<IActionResult> GetListVehicle(string country, string searchByName, string searchByWMI, string searchByVehicleType)
         {
-            return Ok(await _accessServices.GetAllVehicle(country, searchbyName));
+            return Ok(await _accessServices.GetAllVehicle(country, searchByName, searchByWMI, searchByVehicleType));
         }
 
         [HttpGet("Country")]
